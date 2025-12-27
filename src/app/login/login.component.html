@@ -6,8 +6,7 @@
         <i class="bi bi-bank2"></i>
       </div>
       <div class="mt-2">
-        <h1 class="brand-title">SECURE_<span class="highlight">OS</span></h1>
-        <p class="cyber-subtitle">AUTHENTICATION_REQUIRED</p>
+        <h1 class="brand-title">Digital<span class="highlight">Bank</span></h1>
       </div>
     </div>
 
@@ -18,7 +17,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
 
       <div class="mb-3">
-        <label class="cyber-label">SYSTEM_ID</label>
+        <label class="cyber-label">Nom</label>
         <div class="field-wrapper">
           <i class="bi bi-person-fill icon-field"></i>
           <input type="text" formControlName="username" placeholder="Identifiant">
@@ -26,7 +25,7 @@
       </div>
 
       <div class="mb-3">
-        <label class="cyber-label">ACCESS_KEY</label>
+        <label class="cyber-label">Mot de passe</label>
         <div class="field-wrapper">
           <i class="bi bi-key-fill icon-field"></i>
           <input type="password" formControlName="password" placeholder="••••••••">
@@ -35,16 +34,12 @@
 
       <div class="mt-4">
         <button type="submit" [disabled]="loginForm.invalid" class="btn-cyber-primary w-100">
-          DÉVERROUILLER <i class="bi bi-unlock-fill ms-2"></i>
+          ENTRER <i class="bi bi-unlock-fill ms-2"></i>
         </button>
       </div>
 
     </form>
 
-    <div class="text-center mt-3">
-      <span class="status-indicator">
-        <span class="pulse-dot"></span> SECURE_CONNECTION_ESTABLISHED
-      </span>
-    </div>
+
   </div>
 </div>

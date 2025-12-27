@@ -7,12 +7,11 @@
         <div class="title-node">
           <i class="bi bi-people-fill neon-icon"></i>
           <div>
-            <h3>REGISTRE_CLIENTS</h3>
-            <span class="sub-label">ACCÈS_BASE_DONNÉES_SÉCURISÉ</span>
+            <h3>Liste des clients</h3>
           </div>
         </div>
         <button class="btn-enrolment" (click)="handleNewClient()" *ngIf="isAdmin()">
-          <i class="bi bi-person-plus-fill"></i> ENRÔLER_NOUVEAU_CLIENT
+          <i class="bi bi-person-plus-fill"></i> Ajouter un nouveau client
         </button>
       </div>
 
@@ -20,9 +19,9 @@
         <div class="terminal-wrapper">
           <i class="bi bi-search"></i>
           <input type="text"
-                 placeholder="FILTRER_PAR_IDENTITÉ_CLIENT..."
+                 placeholder="Nom du client"
                  [(ngModel)]="keyword">
-          <button class="btn-scan" (click)="handleSearchClients()">SCANNER</button>
+          <button class="btn-scan" (click)="handleSearchClients()">Chercher</button>
         </div>
       </div>
 
@@ -35,11 +34,11 @@
           <table class="cyber-table-grid" *ngIf="clients.length > 0; else noData">
             <thead>
             <tr>
-              <th>NODE_ID</th>
-              <th>IDENTITÉ</th>
-              <th>CANAL_COMMUNICATION</th>
-              <th *ngIf="isAdmin()">PRÉROGATIVES</th>
-              <th class="text-center">TERMINAL</th>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Email</th>
+              <th *ngIf="isAdmin()">Action</th>
+              <th class="text-center">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -50,14 +49,14 @@
 
               <td *ngIf="isAdmin()">
                 <div class="action-dock-sm">
-                  <button class="btn-sm-edit" [routerLink]="['/admin/clients/edit', c.id]">MODIFIER</button>
-                  <button class="btn-sm-delete" (click)="handleDeleteClient(c)">PURGER</button>
+                  <button class="btn-sm-edit" [routerLink]="['/admin/clients/edit', c.id]">Modifier</button>
+                  <button class="btn-sm-delete" (click)="handleDeleteClient(c)">Supprimer</button>
                 </div>
               </td>
 
               <td class="text-center">
                 <button class="btn-view-comptes" [routerLink]="[c.id, 'comptes']">
-                  <i class="bi bi-diagram-3-fill"></i> VOIR_COMPTES
+                  <i class="bi bi-diagram-3-fill"></i> Voir compte
                 </button>
               </td>
             </tr>

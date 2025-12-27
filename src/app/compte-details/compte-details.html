@@ -3,7 +3,7 @@
 
     <div class="glass-panel mb-4 p-3 d-flex justify-content-between align-items-center border-neon-blue">
       <div>
-        <h2 class="cyber-title-sm mb-0">DOSSIER_COMPTE: <span class="highlight">{{ compte.id }}</span></h2>
+        <h2 class="cyber-title-sm mb-0">RIB: <span class="highlight">{{ compte.id }}</span></h2>
         <span class="status-indicator">
           <span class="pulse-dot" [class.bg-activated]="compte.statut === 'ACTIVATED'" [class.bg-suspended]="compte.statut === 'SUSPENDED'"></span>
           SYSTEM_{{ compte.statut }}
@@ -15,11 +15,11 @@
     <div class="row">
       <div class="col-md-6 mb-4">
         <div class="glass-panel h-100 p-4">
-          <h4 class="section-title"><i class="bi bi-cpu-fill me-2"></i> DATA_SPECIFICATIONS</h4>
+          <h4 class="section-title"><i class="bi bi-cpu-fill me-2"></i> Information du compte</h4>
           <hr class="cyber-divider">
 
           <div class="data-row">
-            <span class="label">ID_SYSTÈME</span>
+            <span class="label">RIB</span>
             <span class="value">{{ compte.id }}</span>
           </div>
 
@@ -42,7 +42,7 @@
 
       <div class="col-md-6 mb-4">
         <div class="glass-panel p-4 border-neon-purple">
-          <h4 class="section-title"><i class="bi bi-lightning-charge-fill me-2"></i> NEW_TRANSACTION</h4>
+          <h4 class="section-title"><i class="bi bi-lightning-charge-fill me-2"></i> NOUVELLE_TRANSACTION</h4>
 
           <form [formGroup]="operationForm" (ngSubmit)="submitOperation(compte.id)" class="mt-3">
             <div class="mb-3">
@@ -60,17 +60,17 @@
             </div>
 
             <div class="mb-3">
-              <label class="cyber-label">DESCRIPTION_LOG</label>
-              <input type="text" class="cyber-input" formControlName="description" placeholder="Mémo opération...">
+              <label class="cyber-label">DESCRIPTION</label>
+              <input type="text" class="cyber-input" formControlName="description" placeholder="DESCRIPTION">
             </div>
 
             <div class="mb-3 fade-in" *ngIf="operationForm.value.type === 'VIREMENT'">
-              <label class="cyber-label text-info">ID_DESTINATAIRE_CIBLE</label>
+              <label class="cyber-label text-info">RIB_DESTINATAIRE</label>
               <input type="text" class="cyber-input border-info" formControlName="destinationId" placeholder="ID Compte">
             </div>
 
             <button class="btn-cyber-action w-100 mt-2" [disabled]="compte.statut === 'SUSPENDED'">
-              EXÉCUTER_LA_TRANSACTION <i class="bi bi-shield-check ms-2"></i>
+              ENREGISTRER <i class="bi bi-shield-check ms-2"></i>
             </button>
           </form>
         </div>

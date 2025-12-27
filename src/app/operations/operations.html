@@ -4,8 +4,8 @@
     <div class="glass-search-box mb-5">
       <form [formGroup]="accountFormGroup" (ngSubmit)="handleSearchAccount()" class="d-flex align-items-center">
         <div class="search-icon"><i class="bi bi-cpu-fill"></i></div>
-        <input type="text" formControlName="accountId" placeholder="SCANNER_ID_COMPTE_SYSTEME...">
-        <button class="btn-neon-pulse">INITIALISER LA RECHERCHE</button>
+        <input type="text" formControlName="accountId" placeholder="RIB...">
+        <button class="btn-neon-pulse">Chercher</button>
       </form>
       <div class="scan-line"></div> </div>
 
@@ -16,11 +16,11 @@
           <div class="card-glow"></div>
           <div class="panel-header">
             <span class="status-indicator" [ngClass]="accountObservable.statut"></span>
-            <h5>ÉTAT_ACTIF // {{ accountObservable.type }}</h5>
+            <h5>TYPE DU COMPTE : {{ accountObservable.type }}</h5>
           </div>
 
           <div class="balance-hero">
-            <div class="balance-label">LIQUIDITÉS_DISPONIBLES</div>
+            <div class="balance-label">SOLDE</div>
             <div class="balance-value">
               {{ accountObservable.solde | number:'1.2-2' }} <small>DH</small>
             </div>
@@ -31,7 +31,7 @@
 
           <div class="data-grid-tech">
             <div class="data-box">
-              <span class="label">ID_COMPTE</span>
+              <span class="label">RIB</span>
               <span class="value mono">{{ accountObservable.id }}</span>
             </div>
             <div class="data-box" *ngIf="accountObservable.type === 'COURANT'">
@@ -45,13 +45,13 @@
           </div>
 
           <div class="table-container-glass mt-4">
-            <h6 class="table-title">DERNIERS_FLUX_LOGUÉS</h6>
+            <h6 class="table-title">HISTORIQUE</h6>
             <table class="tech-table">
               <thead>
               <tr>
-                <th>HORODATAGE</th>
-                <th>VECTEUR</th>
-                <th class="text-end">QUANTUM</th>
+                <th>DATE</th>
+                <th>TYPE</th>
+                <th class="text-end">SOLDE</th>
               </tr>
               </thead>
               <tbody>

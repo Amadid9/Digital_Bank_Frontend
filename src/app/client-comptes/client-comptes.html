@@ -1,57 +1,64 @@
-<div class="container mt-3">
+<div class="cyber-viewport fade-in">
+  <div class="container py-4">
 
-  <div class="alert alert-danger" *ngIf="errorMessage">
-    {{ errorMessage }}
-  </div>
-
-  <div class="card" *ngIf="comptes$ | async as comptes">
-    <div class="card-header fw-bold">
-      Comptes du Client
+    <div class="error-toast-cyber mb-4" *ngIf="errorMessage">
+      <i class="bi bi-shield-slash-fill me-2"></i> {{ errorMessage }}
     </div>
 
-    <div class="card-body" *ngIf="comptes.length > 0; else noData">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>Type</th>
-          <th>Solde</th>
-          <th>Statut</th>
-          <th>Action</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr *ngFor="let c of comptes">
-          <td>{{ c.id }}</td>
-          <td>{{ c.type }}</td>
-          <td class="fw-bold text-end">
-            {{ c.solde | number:'1.2-2' }} DH
-          </td>
-          <td>
-            <span class="badge"
-                  [class.bg-success]="c.statut === 'ACTIVATED'"
-                  [class.bg-danger]="c.statut === 'SUSPENDED'"
-                  [class.bg-warning]="c.statut === 'CREATED'">
-              {{ c.statut }}
-            </span>
-          </td>
-          <td>
-            <a class="btn btn-sm btn-outline-primary"
-               [routerLink]="['/compte-details', c.id]">
-              Détails
-            </a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <ng-template #noData>
-      <div class="alert alert-info">
-        Aucun compte pour ce client
+    <div class="glass-panel" *ngIf="comptes$ | async as comptes">
+      <div class="panel-header d-flex justify-content-between align-items-center">
+        <h3 class="section-title mb-0">
+          <i class="bi bi-folder-symlink-fill me-2"></i> Comptes
+        </h3>
+        <span class="badge-count">{{ comptes.length }} Compte(S)</span>
       </div>
-    </ng-template>
+
+      <div class="panel-body mt-3" *ngIf="comptes.length > 0; else noData">
+        <div class="table-responsive">
+          <table class="table cyber-table">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Type du compte</th>
+              <th class="text-end">Solse</th>
+              <th>Status</th>
+              <th class="text-center">Action</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let c of comptes" class="cyber-row">
+              <td class="id-cell">{{ c.id }}</td>
+              <td>
+                <span class="type-indicator">{{ c.type }}</span>
+              </td>
+              <td class="text-end fw-bold balance-cell">
+                {{ c.solde | number:'1.2-2' }} <small>DH</small>
+              </td>
+              <td>
+                  <span class="status-tag" [attr.data-status]="c.statut">
+                    <span class="pulse-dot"></span> {{ c.statut }}
+                  </span>
+              </td>
+              <td class="text-center">
+                <a class="btn-cyber-outline" [routerLink]="['/compte-details', c.id]">
+                  <i class="bi bi-eye-fill"></i> Détails
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <ng-template #noData>
+        <div class="empty-state-cyber py-5 text-center">
+          <i class="bi bi-database-exclamation display-4 mb-3 d-block"></i>
+          <p class="mb-0">AUCUNE_DONNÉE_DÉTECTÉE_POUR_CE_CLIENT</p>
+          <small class="text-muted">Vérifiez les autorisations d'accès au serveur.</small>
+        </div>
+      </ng-template>
+    </div>
 
   </div>
 </div>

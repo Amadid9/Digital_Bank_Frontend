@@ -1,0 +1,84 @@
+<div class="cyber-client-viewport fade-in">
+  <div class="container-fluid p-4">
+
+    <div class="glass-panel database-card">
+
+      <div class="panel-header-cyber">
+        <div class="title-node">
+          <i class="bi bi-people-fill neon-icon"></i>
+          <div>
+            <h3>REGISTRE_CLIENTS</h3>
+            <span class="sub-label">ACCÈS_BASE_DONNÉES_SÉCURISÉ</span>
+          </div>
+        </div>
+        <button class="btn-enrolment" (click)="handleNewClient()" *ngIf="isAdmin()">
+          <i class="bi bi-person-plus-fill"></i> ENRÔLER_NOUVEAU_CLIENT
+        </button>
+      </div>
+
+      <div class="search-terminal-box px-4 py-3">
+        <div class="terminal-wrapper">
+          <i class="bi bi-search"></i>
+          <input type="text"
+                 placeholder="FILTRER_PAR_IDENTITÉ_CLIENT..."
+                 [(ngModel)]="keyword">
+          <button class="btn-scan" (click)="handleSearchClients()">SCANNER</button>
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="cyber-alert-error mx-4 mb-3">
+        <i class="bi bi-exclamation-triangle-fill"></i> {{ errorMessage }}
+      </div>
+
+      <div class="table-container px-4 pb-4">
+        <ng-container *ngIf="clients$ | async as clients; else loading">
+          <table class="cyber-table-grid" *ngIf="clients.length > 0; else noData">
+            <thead>
+            <tr>
+              <th>NODE_ID</th>
+              <th>IDENTITÉ</th>
+              <th>CANAL_COMMUNICATION</th>
+              <th *ngIf="isAdmin()">PRÉROGATIVES</th>
+              <th class="text-center">TERMINAL</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let c of clients" class="cyber-row-data">
+              <td><span class="id-tag">#{{ c.id }}</span></td>
+              <td><span class="client-name">{{ c.nom }}</span></td>
+              <td><span class="client-email">{{ c.email }}</span></td>
+
+              <td *ngIf="isAdmin()">
+                <div class="action-dock-sm">
+                  <button class="btn-sm-edit" [routerLink]="['/admin/clients/edit', c.id]">MODIFIER</button>
+                  <button class="btn-sm-delete" (click)="handleDeleteClient(c)">PURGER</button>
+                </div>
+              </td>
+
+              <td class="text-center">
+                <button class="btn-view-comptes" [routerLink]="[c.id, 'comptes']">
+                  <i class="bi bi-diagram-3-fill"></i> VOIR_COMPTES
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-container>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<ng-template #noData>
+  <div class="empty-state text-center py-5">
+    <i class="bi bi-database-exclamation"></i>
+    <p>AUCUNE_DONNÉE_TROUVÉE_DANS_LE_SECTEUR</p>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="text-center py-5 text-cyan pulse">
+    <div class="spinner-border spinner-border-sm me-2"></div> SYNC_EN_COURS...
+  </div>
+</ng-template>

@@ -1,0 +1,62 @@
+/* --- BASE & LAYOUT --- */
+.cyber-viewport {
+  background: radial-gradient(circle at top right, #0d1117 0%, #06090f 100%);
+  min-height: 100vh;
+  color: #c9d1d9;
+}
+
+.glass-panel {
+  background: rgba(22, 27, 34, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(48, 129, 247, 0.2);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.border-neon-blue { border-left: 4px solid #3081f7; }
+.border-neon-purple { border-left: 4px solid #8250df; }
+
+/* --- TYPOGRAPHIE --- */
+.cyber-title-sm { font-weight: 800; letter-spacing: 1px; color: #f0f6fc; font-size: 1.2rem; }
+.section-title { font-size: 0.85rem; font-weight: 800; color: #8b949e; letter-spacing: 2px; }
+.highlight { color: #3081f7; }
+.cyber-label { font-size: 10px; font-weight: 800; color: #484f58; margin-bottom: 5px; display: block; }
+
+/* --- DATA ROWS --- */
+.data-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.data-row .label { font-size: 11px; font-weight: 600; color: #8b949e; }
+.balance-neon { color: #3fb950; font-size: 1.4rem; font-weight: 900; text-shadow: 0 0 10px rgba(63, 185, 80, 0.2); }
+
+/* --- FORMULAIRE --- */
+.cyber-input, .cyber-select {
+  background: #0d1117; border: 1px solid #30363d; border-radius: 8px;
+  color: white; padding: 10px; width: 100%; outline: none; transition: 0.3s; font-size: 0.9rem;
+}
+.cyber-input:focus { border-color: #3081f7; }
+
+.btn-cyber-action {
+  background: linear-gradient(135deg, #238636, #2ea043);
+  color: white; border: none; padding: 12px; border-radius: 10px;
+  font-weight: 800; letter-spacing: 1px; transition: 0.3s; font-size: 12px;
+}
+.btn-cyber-action:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 0 20px rgba(46, 160, 67, 0.4); }
+
+/* --- TABLEAU --- */
+.cyber-table { color: #c9d1d9; border-color: #30363d; margin-top: 10px; }
+.cyber-table thead th { font-size: 10px; letter-spacing: 1px; color: #484f58; border-bottom: 2px solid #30363d; }
+.op-badge {
+  font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: 800; border: 1px solid rgba(255,255,255,0.1);
+}
+.op-badge[data-type="CREDIT"] { color: #3fb950; border-color: #3fb950; }
+.op-badge[data-type="DEBIT"] { color: #f85149; border-color: #f85149; }
+.op-badge[data-type="VIREMENT"] { color: #d29922; border-color: #d29922; }
+
+/* --- ANIMATIONS --- */
+.status-indicator { font-size: 9px; color: #8b949e; font-weight: 700; }
+.pulse-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 5px; animation: pulse 2s infinite; }
+.bg-activated { background: #3fb950; box-shadow: 0 0 8px #3fb950; }
+.bg-suspended { background: #f85149; box-shadow: 0 0 8px #f85149; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }

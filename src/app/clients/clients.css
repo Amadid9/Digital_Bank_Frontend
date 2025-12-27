@@ -1,0 +1,107 @@
+:root {
+  --neon-blue: #3081f7;
+  --neon-cyan: #00f2ff;
+  --neon-red: #da3633;
+  --neon-gold: #e3b341;
+  --glass-bg: rgba(22, 27, 34, 0.85);
+  --border-line: rgba(255, 255, 255, 0.08);
+}
+
+.cyber-client-viewport {
+  background: #06090f;
+  min-height: 100vh;
+  color: #c9d1d9;
+  font-family: 'Inter', sans-serif;
+}
+
+/* --- CARTE GLASSMORPHISM --- */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px);
+  border-radius: 24px;
+  border: 1px solid var(--border-line);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.panel-header-cyber {
+  padding: 30px;
+  border-bottom: 1px solid var(--border-line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(48, 129, 247, 0.03);
+}
+
+.neon-icon { font-size: 32px; color: var(--neon-blue); text-shadow: 0 0 15px var(--neon-blue); }
+.title-node h3 { font-weight: 900; margin: 0; letter-spacing: 2px; font-size: 1.3rem; }
+.sub-label { font-size: 10px; color: var(--neon-blue); font-weight: 700; }
+
+/* --- BOUTON ENRÔLER --- */
+.btn-enrolment {
+  background: linear-gradient(135deg, #2563eb, #3081f7);
+  color: white; border: none; padding: 12px 20px; border-radius: 12px;
+  font-size: 11px; font-weight: 800; letter-spacing: 1px;
+  box-shadow: 0 0 20px rgba(48, 129, 247, 0.3);
+  transition: 0.3s;
+}
+.btn-enrolment:hover { transform: translateY(-2px); filter: brightness(1.2); }
+
+/* --- BARRE DE RECHERCHE --- */
+.terminal-wrapper {
+  background: #0d1117;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  padding: 6px 15px;
+  border: 1px solid #30363d;
+}
+.terminal-wrapper i { color: var(--neon-blue); margin-right: 15px; }
+.terminal-wrapper input {
+  background: transparent; border: none; color: white; flex: 1; padding: 10px; outline: none;
+}
+.btn-scan {
+  background: var(--neon-blue); border: none; border-radius: 8px;
+  padding: 6px 15px; color: white; font-weight: 900; font-size: 11px;
+}
+
+/* --- TABLEAU CYBER --- */
+.cyber-table-grid { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+.cyber-table-grid thead th { font-size: 10px; color: #484f58; padding: 10px; letter-spacing: 1px; }
+
+.cyber-row-data { background: rgba(255, 255, 255, 0.02); transition: 0.3s; }
+.cyber-row-data:hover { background: rgba(48, 129, 247, 0.08); transform: scale(1.005); }
+
+.cyber-row-data td { padding: 20px 15px; border-top: 1px solid var(--border-line); border-bottom: 1px solid var(--border-line); }
+.cyber-row-data td:first-child { border-left: 1px solid var(--border-line); border-top-left-radius: 15px; border-bottom-left-radius: 15px; }
+.cyber-row-data td:last-child { border-right: 1px solid var(--border-line); border-top-right-radius: 15px; border-bottom-right-radius: 15px; }
+
+/* --- DÉTAILS CELLULES --- */
+.id-tag { font-family: 'JetBrains Mono', monospace; color: var(--neon-cyan); background: rgba(0, 242, 255, 0.1); padding: 4px 10px; border-radius: 6px; font-size: 11px; }
+.client-name { font-weight: 800; color: white; }
+.client-email { color: #8b949e; font-size: 13px; }
+
+/* --- ACTIONS --- */
+.action-dock-sm { display: flex; gap: 8px; }
+.btn-sm-edit, .btn-sm-delete {
+  padding: 5px 12px; border-radius: 6px; font-size: 9px; font-weight: 900; border: none; transition: 0.2s;
+}
+.btn-sm-edit { background: rgba(227, 179, 65, 0.1); color: var(--neon-gold); }
+.btn-sm-delete { background: rgba(218, 54, 51, 0.1); color: var(--neon-red); }
+.btn-sm-edit:hover { background: var(--neon-gold); color: black; }
+.btn-sm-delete:hover { background: var(--neon-red); color: white; }
+
+.btn-view-comptes {
+  background: transparent; border: 1px solid var(--neon-blue); color: var(--neon-blue);
+  padding: 8px 15px; border-radius: 10px; font-size: 10px; font-weight: 900; transition: 0.3s;
+}
+.btn-view-comptes:hover { background: var(--neon-blue); color: white; box-shadow: 0 0 15px rgba(48, 129, 247, 0.4); }
+
+/* --- ÉTATS --- */
+.cyber-alert-error {
+  background: rgba(218, 54, 51, 0.1); border: 1px solid var(--neon-red);
+  color: var(--neon-red); padding: 12px; border-radius: 12px; font-size: 12px;
+}
+.empty-state { color: #484f58; }
+.empty-state i { font-size: 3rem; margin-bottom: 10px; display: block; }
+.pulse { animation: pulseAnim 2s infinite; }
+@keyframes pulseAnim { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }

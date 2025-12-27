@@ -1,0 +1,91 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+
+    <!-- Brand -->
+    <a class="navbar-brand"
+       [routerLink]="isAdmin() ? '/admin/about' : '/employee/about'">
+      <div class="brand-icon">
+        <i class="bi bi-bank2"></i>
+      </div>
+      <span class="brand-text">
+        Digital<span class="text-primary">Bank</span>
+      </span>
+    </a>
+
+    <!-- Mobile toggle -->
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <!-- Center links -->
+      <ul class="navbar-nav mx-auto">
+
+        <!-- ABOUT (was Dashboard) -->
+
+
+        <li class="nav-item">
+          <a class="nav-link"
+             [routerLink]="isAdmin() ? '/admin/clients' : '/employee/clients'"
+             routerLinkActive="active">
+            <i class="bi bi-people-fill"></i> Clients
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link"
+             [routerLink]="isAdmin() ? '/admin/comptes' : '/employee/comptes'"
+             routerLinkActive="active">
+            <i class="bi bi-wallet2"></i> Comptes
+          </a>
+        </li>
+
+        <!-- Admin only -->
+        <li class="nav-item" *ngIf="authService.isAdmin()">
+          <a class="nav-link"
+             routerLink="/admin/nouveau-compte"
+             routerLinkActive="active">
+            <i class="bi bi-plus-circle-fill"></i> Nouveau
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link"
+             [routerLink]="isAdmin() ? '/admin/operations' : '/employee/operations'"
+             routerLinkActive="active">
+            <i class="bi bi-arrow-left-right"></i> Operations
+          </a>
+        </li>
+      </ul>
+
+      <!-- User dropdown -->
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle user-profile-link"
+             href="#"
+             role="button"
+             data-bs-toggle="dropdown"
+             aria-expanded="false">
+            <div class="user-avatar"
+                 [attr.data-initial]="getUserInitial()"></div>
+            <span class="username">
+              {{ authService.getUsername() }}
+            </span>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end border-0 shadow">
+            <li>
+              <button class="dropdown-item text-danger" (click)="logout()">
+                <i class="bi bi-box-arrow-right"></i> Déconnexion
+              </button>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>

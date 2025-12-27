@@ -1,0 +1,116 @@
+<div class="fintech-dashboard fade-in">
+  <div class="container-fluid p-4">
+
+    <div class="glass-search-box mb-5">
+      <form [formGroup]="accountFormGroup" (ngSubmit)="handleSearchAccount()" class="d-flex align-items-center">
+        <div class="search-icon"><i class="bi bi-cpu-fill"></i></div>
+        <input type="text" formControlName="accountId" placeholder="SCANNER_ID_COMPTE_SYSTEME...">
+        <button class="btn-neon-pulse">INITIALISER LA RECHERCHE</button>
+      </form>
+      <div class="scan-line"></div> </div>
+
+    <div class="row g-4" *ngIf="accountObservable">
+
+      <div class="col-xl-8">
+        <div class="glass-card main-panel">
+          <div class="card-glow"></div>
+          <div class="panel-header">
+            <span class="status-indicator" [ngClass]="accountObservable.statut"></span>
+            <h5>ÉTAT_ACTIF // {{ accountObservable.type }}</h5>
+          </div>
+
+          <div class="balance-hero">
+            <div class="balance-label">LIQUIDITÉS_DISPONIBLES</div>
+            <div class="balance-value">
+              {{ accountObservable.solde | number:'1.2-2' }} <small>DH</small>
+            </div>
+            <div class="balance-chart-mini">
+              <div class="wave"></div>
+            </div>
+          </div>
+
+          <div class="data-grid-tech">
+            <div class="data-box">
+              <span class="label">ID_COMPTE</span>
+              <span class="value mono">{{ accountObservable.id }}</span>
+            </div>
+            <div class="data-box" *ngIf="accountObservable.type === 'COURANT'">
+              <span class="label">DÉCOUVERT_AUTORISÉ</span>
+              <span class="value text-warning">{{ accountObservable.decouvert }} DH</span>
+            </div>
+            <div class="data-box" *ngIf="accountObservable.type === 'EPARGNE'">
+              <span class="label">RENDEMENT_ANNUEL</span>
+              <span class="value text-info">{{ accountObservable.tauxInteret }}%</span>
+            </div>
+          </div>
+
+          <div class="table-container-glass mt-4">
+            <h6 class="table-title">DERNIERS_FLUX_LOGUÉS</h6>
+            <table class="tech-table">
+              <thead>
+              <tr>
+                <th>HORODATAGE</th>
+                <th>VECTEUR</th>
+                <th class="text-end">QUANTUM</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let op of operations">
+                <td>{{ op.dateOperation | date:'dd.MM.yyyy | HH:mm' }}</td>
+                <td><span class="badge-tech" [ngClass]="op.type">{{ op.type }}</span></td>
+                <td class="text-end fw-bold" [style.color]="op.type === 'DEBIT' ? '#ff4d4d' : '#00ffcc'">
+                  {{ op.type === 'DEBIT' ? '-' : '+' }}{{ op.montant | number:'1.2-2' }}
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4">
+        <div class="glass-card operation-terminal">
+          <div class="panel-header">
+            <i class="bi bi-terminal"></i> CONSOLE_EXÉCUTION
+          </div>
+
+          <form [formGroup]="operationFormGroup" (ngSubmit)="handleAccountOperation()" class="mt-4">
+            <div class="type-selector mb-4">
+              <div class="selector-label">SÉLECTION_PROTOCOLE</div>
+              <div class="custom-radio-group">
+                <input type="radio" id="debit" value="DEBIT" formControlName="operationType">
+                <label for="debit">DÉBIT</label>
+
+                <input type="radio" id="credit" value="CREDIT" formControlName="operationType">
+                <label for="credit">CRÉDIT</label>
+
+                <input type="radio" id="transfer" value="TRANSFER" formControlName="operationType">
+                <label for="transfer">TRANSF</label>
+              </div>
+            </div>
+
+            <div class="input-glow-group">
+              <label>VALEUR_TRANSACTION</label>
+              <input type="number" formControlName="amount" placeholder="0.00 DH">
+            </div>
+
+            <div class="input-glow-group">
+              <label>MÉTA_DESCRIPTION</label>
+              <input type="text" formControlName="description" placeholder="LOG_INFO...">
+            </div>
+
+            <div class="input-glow-group" *ngIf="operationFormGroup.value.operationType === 'TRANSFER'">
+              <label>ID_DESTINATAIRE_CIBLE</label>
+              <input type="text" formControlName="accountDestination" placeholder="TARGET_ID...">
+            </div>
+
+            <button type="submit" class="btn-execute-glow">
+              EXÉCUTER_ORDRE <i class="bi bi-shield-shaded"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

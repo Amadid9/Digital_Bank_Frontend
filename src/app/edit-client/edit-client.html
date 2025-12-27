@@ -1,0 +1,60 @@
+<div class="auth-viewport cyber-bg">
+  <div class="auth-card glass-panel fade-in">
+
+    <div class="logo-section mb-5">
+      <div class="logo-glow-box">
+        <i class="bi bi-pencil-square"></i>
+      </div>
+      <div class="text-center mt-3">
+        <h1 class="brand-title">MODIFIER_ <span class="highlight">CLIENT</span></h1>
+        <p class="cyber-subtitle">PROTOCOLE_UPDATE_SYNCHRONIZATION</p>
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-alert-cyber mb-4">
+      <i class="bi bi-exclamation-octagon-fill"></i>
+      <span>{{ errorMessage }}</span>
+    </div>
+
+    <div *ngIf="successMessage" class="success-alert-cyber mb-4">
+      <i class="bi bi-shield-check"></i>
+      <span>{{ successMessage }}</span>
+    </div>
+
+    <form [formGroup]="clientForm" (ngSubmit)="handleUpdateClient()" class="auth-form">
+
+      <div class="input-container mb-4">
+        <label class="cyber-label"><i class="bi bi-person-check me-1"></i> IDENTITÉ_REGISTRE</label>
+        <div class="field-wrapper" [class.field-error]="clientForm.get('nom')?.touched && clientForm.get('nom')?.invalid">
+          <i class="bi bi-person-fill icon-field"></i>
+          <input type="text" formControlName="nom" placeholder="Nom du client...">
+        </div>
+        <div *ngIf="clientForm.get('nom')?.touched && clientForm.get('nom')?.invalid" class="error-hint-neon">
+          <i class="bi bi-info-circle"></i> Donnée requise (min. 4 caractères).
+        </div>
+      </div>
+
+      <div class="input-container mb-4">
+        <label class="cyber-label"><i class="bi bi-link-45deg me-1"></i> CANAL_COMMUNICATION</label>
+        <div class="field-wrapper" [class.field-error]="clientForm.get('email')?.touched && clientForm.get('email')?.invalid">
+          <i class="bi bi-envelope-at-fill icon-field"></i>
+          <input type="email" formControlName="email" placeholder="Email du client...">
+        </div>
+        <div *ngIf="clientForm.get('email')?.touched && clientForm.get('email')?.invalid" class="error-hint-neon">
+          <i class="bi bi-info-circle"></i> Format d'email non valide.
+        </div>
+      </div>
+
+      <div class="form-actions-cyber mt-5">
+        <button type="button" routerLink="/admin/clients" class="btn-cyber-outline">
+          <i class="bi bi-chevron-left"></i> RETOUR
+        </button>
+        <button type="submit" [disabled]="clientForm.invalid" class="btn-cyber-primary">
+          <i class="bi bi-arrow-repeat"></i>
+          <span class="btn-text">METTRE_À_JOUR</span>
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

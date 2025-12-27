@@ -1,0 +1,93 @@
+<div class="cyber-list-container fade-in">
+  <div class="container-fluid pt-4 px-4">
+
+    <div *ngIf="errorMessage" class="cyber-error-banner mb-4">
+      <div class="error-icon"><i class="bi bi-exclamation-octagon-fill"></i></div>
+      <div class="error-msg">
+        <span class="label">SYSTEM_ERROR :</span> {{ errorMessage }}
+      </div>
+    </div>
+
+    <div class="glass-panel" *ngIf="comptes">
+      <div class="panel-header-main">
+        <div class="title-group">
+          <i class="bi bi-layers-half neon-icon"></i>
+          <div>
+            <h3>REGISTRE_DES_COMPTES</h3>
+            <span class="sub-label">INDEX_GLOBAL_BANCAIRE</span>
+          </div>
+        </div>
+        <div class="system-stats d-none d-md-flex">
+          <span class="stat-node"><span class="dot green"></span> NODES_ACTIVE</span>
+          <span class="stat-node">TOTAL : {{ comptes.length }}</span>
+        </div>
+      </div>
+
+      <div class="table-responsive-cyber">
+        <table class="cyber-grid">
+          <thead>
+          <tr>
+            <th><i class="bi bi-fingerprint"></i> ID_REF</th>
+            <th><i class="bi bi-calendar3"></i> TIMESTAMP</th>
+            <th><i class="bi bi-shield-shaded"></i> PROTOCOLE</th>
+            <th class="text-end"><i class="bi bi-wallet2"></i> LIQUIDITÉS</th>
+            <th><i class="bi bi-person-bounding-box"></i> CLIENT_ID</th>
+            <th><i class="bi bi-activity"></i> STATUS</th>
+            <th class="text-center">TERMINAL</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let c of comptes" class="cyber-row">
+            <td>
+              <span class="id-badge">{{ c.id }}</span>
+            </td>
+            <td class="time-stamp">
+              {{ c.dateCreation | date:'yyyy.MM.dd' }}
+            </td>
+            <td>
+                <span class="type-pill" [ngClass]="c.type === 'COURANT' ? 'cyan' : 'gold'">
+                  {{ c.type }}
+                </span>
+            </td>
+            <td class="text-end">
+              <div class="balance-cell">
+                <span class="currency">DH</span>
+                <span class="amount">{{ c.solde | number:'1.2-2' }}</span>
+              </div>
+            </td>
+            <td>
+              <div class="client-node">
+                <div class="node-avatar">{{ c.clientId?.toString().substring(0, 2) }}</div>
+                <span class="node-id">#{{ c.clientId }}</span>
+              </div>
+            </td>
+            <td>
+              <div class="status-cell">
+                <button *ngIf="isAdmin() && c.statut !== 'SUSPENDED'"
+                        class="btn-status-action" (click)="handleStatusChange(c)">
+                  <i class="bi bi-pause-fill"></i> SUSPENDRE
+                </button>
+                <span *ngIf="!isAdmin() || c.statut === 'SUSPENDED'"
+                      class="status-tag" [ngClass]="c.statut === 'SUSPENDED' ? 'red' : 'green'">
+                    {{ c.statut === 'SUSPENDED' ? 'SUSPENDED' : 'ACTIVE' }}
+                  </span>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="action-dock">
+                <button class="btn-icon-blue" [routerLink]="['/compte-details', c.id]" title="Détails">
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button *ngIf="isAdmin()" class="btn-icon-red" (click)="handleDeleteCompte(c)" title="Supprimer">
+                  <i class="bi bi-trash3"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>

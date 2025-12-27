@@ -1,0 +1,50 @@
+<div class="auth-viewport cyber-bg">
+  <div class="auth-card glass-panel fade-in">
+
+    <div class="logo-section mb-4 text-center">
+      <div class="logo-glow-box">
+        <i class="bi bi-bank2"></i>
+      </div>
+      <div class="mt-2">
+        <h1 class="brand-title">SECURE_<span class="highlight">OS</span></h1>
+        <p class="cyber-subtitle">AUTHENTICATION_REQUIRED</p>
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-toast mb-3">
+      <i class="bi bi-shield-slash-fill me-2"></i> {{ errorMessage }}
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
+
+      <div class="mb-3">
+        <label class="cyber-label">SYSTEM_ID</label>
+        <div class="field-wrapper">
+          <i class="bi bi-person-fill icon-field"></i>
+          <input type="text" formControlName="username" placeholder="Identifiant">
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="cyber-label">ACCESS_KEY</label>
+        <div class="field-wrapper">
+          <i class="bi bi-key-fill icon-field"></i>
+          <input type="password" formControlName="password" placeholder="••••••••">
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <button type="submit" [disabled]="loginForm.invalid" class="btn-cyber-primary w-100">
+          DÉVERROUILLER <i class="bi bi-unlock-fill ms-2"></i>
+        </button>
+      </div>
+
+    </form>
+
+    <div class="text-center mt-3">
+      <span class="status-indicator">
+        <span class="pulse-dot"></span> SECURE_CONNECTION_ESTABLISHED
+      </span>
+    </div>
+  </div>
+</div>

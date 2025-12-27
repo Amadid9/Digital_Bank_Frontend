@@ -1,0 +1,55 @@
+<div class="auth-viewport cyber-bg">
+  <div class="auth-card glass-panel fade-in">
+
+    <div class="logo-section mb-5">
+      <div class="logo-glow-box">
+        <i class="bi bi-person-plus-fill"></i>
+      </div>
+      <div class="text-center mt-3">
+        <h1 class="brand-title">ENRÔLEMENT_ <span class="highlight">CLIENT</span></h1>
+        <p class="cyber-subtitle">PROTOCOLE_ID_REGISTRATION_V1.0</p>
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-alert-cyber mb-4">
+      <i class="bi bi-exclamation-octagon-fill"></i>
+      <span>{{ errorMessage }}</span>
+    </div>
+
+    <form [formGroup]="clientForm" (ngSubmit)="handleSaveClient()" class="auth-form">
+
+      <div class="input-container mb-4">
+        <label class="cyber-label"><i class="bi bi-shield-lock me-1"></i> IDENTITÉ_COMPLÈTE</label>
+        <div class="field-wrapper" [class.field-error]="clientForm.get('nom')?.touched && clientForm.get('nom')?.invalid">
+          <i class="bi bi-person-fill icon-field"></i>
+          <input type="text" formControlName="nom" placeholder="Saisir le nom complet...">
+        </div>
+        <div *ngIf="clientForm.get('nom')?.touched && clientForm.get('nom')?.invalid" class="error-hint-neon">
+          <i class="bi bi-info-circle"></i> Paramètre invalide (min. 4 caractères).
+        </div>
+      </div>
+
+      <div class="input-container mb-4">
+        <label class="cyber-label"><i class="bi bi-hdd-network me-1"></i> CANAL_COMMUNICATION</label>
+        <div class="field-wrapper" [class.field-error]="clientForm.get('email')?.touched && clientForm.get('email')?.invalid">
+          <i class="bi bi-envelope-at-fill icon-field"></i>
+          <input type="email" formControlName="email" placeholder="Saisir l'adresse mail...">
+        </div>
+        <div *ngIf="clientForm.get('email')?.touched && clientForm.get('email')?.invalid" class="error-hint-neon">
+          <i class="bi bi-info-circle"></i> Format d'email non reconnu.
+        </div>
+      </div>
+
+      <div class="form-actions-cyber mt-5">
+        <button type="button" routerLink="/admin/clients" class="btn-cyber-outline">
+          <i class="bi bi-chevron-left"></i> ANNULER
+        </button>
+        <button type="submit" [disabled]="clientForm.invalid" class="btn-cyber-primary">
+          <span class="btn-text">INITIALISER_LE_CLIENT</span>
+          <i class="bi bi-arrow-right-short"></i>
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

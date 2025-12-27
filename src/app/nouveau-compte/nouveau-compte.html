@@ -1,0 +1,75 @@
+<div class="cyber-creation-container fade-in">
+  <div class="d-flex justify-content-center align-items-center min-vh-100 p-3">
+
+    <div class="glass-card creation-panel w-100" style="max-width: 550px;">
+      <div class="panel-header-tech">
+        <div class="header-icon"><i class="bi bi-shield-plus"></i></div>
+        <div>
+          <h3>INITIALISER_NOUVEAU_COMPTE</h3>
+          <span class="sub-text">PROTOCOLE_OUVERTURE_V2.5</span>
+        </div>
+      </div>
+
+      <div class="card-body p-4">
+        <form [formGroup]="accountFormGroup" (ngSubmit)="handleSaveAccount()" class="cyber-form">
+
+          <div class="input-glow-group mb-4">
+            <label><i class="bi bi-person-check me-2"></i>SÉLECTION_CLIENT_CIBLE</label>
+            <div class="select-wrapper">
+              <select formControlName="clientId" class="cyber-select">
+                <option value="" disabled selected>Choisir un client dans la base...</option>
+                <option *ngFor="let c of clients" [value]="c.id">
+                  {{ c.nom }} — {{ c.email }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-glow-group mb-4">
+            <label><i class="bi bi-currency-exchange me-2"></i>QUANTUM_INITIAL (DH)</label>
+            <div class="field-wrapper">
+              <input type="number" formControlName="balance" placeholder="0.00">
+            </div>
+          </div>
+
+          <div class="input-glow-group mb-4">
+            <label><i class="bi bi-layers me-2"></i>CATÉGORIE_DE_COMPTE</label>
+            <div class="custom-radio-group">
+              <input type="radio" id="courant" formControlName="type" value="Courant">
+              <label for="courant" class="chip">COURANT</label>
+
+              <input type="radio" id="epargne" formControlName="type" value="Epargne">
+              <label for="epargne" class="chip">ÉPARGNE</label>
+            </div>
+          </div>
+
+          <div class="conditional-section" *ngIf="accountFormGroup.value.type">
+
+            <div class="input-glow-group mb-4 slide-down" *ngIf="accountFormGroup.value.type == 'Courant'">
+              <label><i class="bi bi-arrow-down-right-circle me-2"></i>DÉCOUVERT_AUTORISÉ</label>
+              <div class="field-wrapper warning">
+                <input type="number" formControlName="overDraft" placeholder="Limite de découvert">
+              </div>
+            </div>
+
+            <div class="input-glow-group mb-4 slide-down" *ngIf="accountFormGroup.value.type == 'Epargne'">
+              <label><i class="bi bi-percent me-2"></i>TAUX_D_INTÉRÊT_ANNUEL</label>
+              <div class="field-wrapper info">
+                <input type="number" formControlName="interestRate" placeholder="Ex: 3.5">
+              </div>
+            </div>
+
+          </div>
+
+          <button [disabled]="!accountFormGroup.valid" class="btn-execute-auth mt-3">
+            <span class="btn-content">
+              <i class="bi bi-plus-circle-fill"></i> GÉNÉRER_LE_COMPTE
+            </span>
+          </button>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

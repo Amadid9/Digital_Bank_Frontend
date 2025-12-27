@@ -1,0 +1,57 @@
+<div class="container mt-3">
+
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <div class="card" *ngIf="comptes$ | async as comptes">
+    <div class="card-header fw-bold">
+      Comptes du Client
+    </div>
+
+    <div class="card-body" *ngIf="comptes.length > 0; else noData">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Solde</th>
+          <th>Statut</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let c of comptes">
+          <td>{{ c.id }}</td>
+          <td>{{ c.type }}</td>
+          <td class="fw-bold text-end">
+            {{ c.solde | number:'1.2-2' }} DH
+          </td>
+          <td>
+            <span class="badge"
+                  [class.bg-success]="c.statut === 'ACTIVATED'"
+                  [class.bg-danger]="c.statut === 'SUSPENDED'"
+                  [class.bg-warning]="c.statut === 'CREATED'">
+              {{ c.statut }}
+            </span>
+          </td>
+          <td>
+            <a class="btn btn-sm btn-outline-primary"
+               [routerLink]="['/compte-details', c.id]">
+              Détails
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #noData>
+      <div class="alert alert-info">
+        Aucun compte pour ce client
+      </div>
+    </ng-template>
+
+  </div>
+</div>

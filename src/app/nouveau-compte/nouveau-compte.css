@@ -1,0 +1,139 @@
+:root {
+  --neon-blue: #3081f7;
+  --neon-cyan: #00f2ff;
+  --bg-void: #06090f;
+  --glass-bg: rgba(21, 25, 33, 0.85);
+  --border-glow: rgba(48, 129, 247, 0.2);
+}
+
+.cyber-creation-container {
+  background: radial-gradient(circle at top, #0d1117 0%, #06090f 100%);
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+/* --- CARTE GLASSMORPHISM --- */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+}
+
+.panel-header-tech {
+  padding: 30px;
+  background: rgba(48, 129, 247, 0.05);
+  border-bottom: 1px solid var(--border-glow);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-radius: 30px 30px 0 0;
+}
+
+.header-icon {
+  font-size: 32px;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 15px var(--neon-cyan);
+}
+
+.panel-header-tech h3 {
+  font-weight: 900;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  margin: 0;
+  color: white;
+}
+
+.sub-text { font-size: 9px; color: var(--neon-blue); font-weight: 800; letter-spacing: 1px; }
+
+/* --- CHAMPS DE SAISIE --- */
+.input-glow-group label {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  color: #8b949e;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.field-wrapper input, .cyber-select {
+  width: 100%;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  padding: 15px;
+  border-radius: 12px;
+  color: white;
+  outline: none;
+  transition: 0.3s;
+}
+
+.field-wrapper input:focus, .cyber-select:focus {
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 15px rgba(48, 129, 247, 0.2);
+}
+
+/* --- CHIPS RADIOS --- */
+.custom-radio-group {
+  display: flex;
+  background: #0d1117;
+  padding: 6px;
+  border-radius: 14px;
+  gap: 6px;
+}
+
+.custom-radio-group input { display: none; }
+.custom-radio-group .chip {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+  color: #8b949e;
+  transition: 0.3s;
+}
+
+.custom-radio-group input:checked + .chip {
+  background: var(--neon-blue);
+  color: white;
+  box-shadow: 0 5px 15px rgba(48, 129, 247, 0.4);
+}
+
+/* --- BOUTON D'EXÉCUTION --- */
+.btn-execute-auth {
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(90deg, #2563eb, #3081f7);
+  border: none;
+  border-radius: 16px;
+  color: white;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 2px;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+  transition: 0.3s;
+}
+
+.btn-execute-auth:disabled {
+  filter: grayscale(1);
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.btn-execute-auth:not(:disabled):hover {
+  transform: translateY(-3px);
+  filter: brightness(1.2);
+  box-shadow: 0 15px 30px rgba(37, 99, 235, 0.6);
+}
+
+/* --- ANIMATIONS --- */
+.slide-down {
+  animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
